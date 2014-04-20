@@ -17,7 +17,6 @@
  */
 
 
-
 #include <cstdlib>
 #include <ctime>
 
@@ -183,9 +182,9 @@ class ddtmath
 		return true;
 	}
 
-	static int16_t save_add_s16(int16_t a, int16_t b, int32_t* temp)
+	static __int16 save_add_s16(__int16 a, __int16 b, __int32* temp)
 	{
-		(*temp) = (int32_t)a + (int32_t)b;
+		(*temp) = (__int32)a + (__int32)b;
 
 		if((*temp) >  0x7fff) {return  0x7fff;}
 		if((*temp) < -0x7fff) {return -0x7fff;}
@@ -201,7 +200,7 @@ class ddtmath
 
 	}
 
-	static int16_t float_to_s16(float in)
+	static __int16 float_to_s16(float in)
 	{
 
 		if(in >  0x7fff)
@@ -214,7 +213,7 @@ class ddtmath
 			return -0x7fff;
 		}
 
-		return (int16_t)in;
+		return (__int16)in;
 	}
 
 

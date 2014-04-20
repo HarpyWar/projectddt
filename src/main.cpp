@@ -32,7 +32,7 @@ SDL
 pthread
 */
 
-
+#include "stdafx.h"
 #include "levg_tsc_transcode.cpp"
 
 using namespace std;
@@ -592,6 +592,13 @@ int world_thread_func(void *data)
 }
 
 
+/*
+#include "stdafx.h"
+int _tmain(int argc, _TCHAR* argv[])
+{
+	return 0;
+}
+*/
 
 int main( int argc, char *argv[] )
 {

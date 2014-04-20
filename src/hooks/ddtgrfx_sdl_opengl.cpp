@@ -15,12 +15,12 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+#include "stdafx.h"
 
 
 
-
-#include "SDL/SDL.h"
-#include "SDL/SDL_opengl.h"
+#include "libsdl/SDL.h"
+#include "libsdl/SDL_opengl.h"
 #include <iostream>
 #include <cmath>
 #include <cstdlib>

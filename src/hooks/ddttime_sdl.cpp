@@ -17,8 +17,7 @@
  */
 
 
-
-#include "SDL/SDL.h"
+#include "libsdl/SDL.h"
 using namespace std;
 
 

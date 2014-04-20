@@ -15,7 +15,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
+#include "stdafx.h"
 
 
 
@@ -1149,7 +1149,7 @@ class screens_manager
 	void settings_set_option_discription(int opt)
 	{
 		int line_count = 0;
-		string* field;
+		string* field = new string();
 
 		if (opt == OPT_WIDTH)
 		{

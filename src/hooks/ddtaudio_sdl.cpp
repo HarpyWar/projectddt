@@ -18,8 +18,7 @@
 
 
 
-
-#include "SDL/SDL.h"
+#include "libsdl/SDL.h"
 
 
 #include <iostream>

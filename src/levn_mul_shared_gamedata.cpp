@@ -15,7 +15,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
+#include "stdafx.h"
 
 
 
@@ -386,34 +386,34 @@ class globals
 
 	void lock_tile(uint32_t tile_x, uint32_t tile_y)
 	{
-		uint32_t x_mod = tile_x & 0b00000000000000000000000001111111;
-		uint32_t y_mod = tile_y & 0b00000000000000000000000001111111;
+		uint32_t x_mod = tile_x & B(00000000000000000000000001111111);
+		uint32_t y_mod = tile_y & B(00000000000000000000000001111111);
 		ddttime::lock_mutex(tile_locker[x_mod][y_mod]);
 	}
 
 	void unlock_tile(uint32_t tile_x, uint32_t tile_y)
 	{
-		uint32_t x_mod = tile_x & 0b00000000000000000000000001111111;
-		uint32_t y_mod = tile_y & 0b00000000000000000000000001111111;
+		uint32_t x_mod = tile_x & B(00000000000000000000000001111111);
+		uint32_t y_mod = tile_y & B(00000000000000000000000001111111);
 		ddttime::unlock_mutex(tile_locker[x_mod][y_mod]);
 	}
 
 	void lock_second_tile(uint32_t own_x, uint32_t own_y, uint32_t tile_x, uint32_t tile_y)
 	{
-		uint32_t ox_mod = own_x  & 0b00000000000000000000000001111111;
-		uint32_t oy_mod = own_y  & 0b00000000000000000000000001111111;
-		uint32_t tx_mod = tile_x & 0b00000000000000000000000001111111;
-		uint32_t ty_mod = tile_y & 0b00000000000000000000000001111111;
+		uint32_t ox_mod = own_x  & B(00000000000000000000000001111111);
+		uint32_t oy_mod = own_y  & B(00000000000000000000000001111111);
+		uint32_t tx_mod = tile_x & B(00000000000000000000000001111111);
+		uint32_t ty_mod = tile_y & B(00000000000000000000000001111111);
 		if ( (ox_mod == tx_mod) && (oy_mod == ty_mod)) { return; }
 		ddttime::lock_mutex(tile_locker[tx_mod][ty_mod]);
 	}
 
 	void unlock_second_tile(uint32_t own_x, uint32_t own_y, uint32_t tile_x, uint32_t tile_y)
 	{
-		uint32_t ox_mod = own_x  & 0b00000000000000000000000001111111;
-		uint32_t oy_mod = own_y  & 0b00000000000000000000000001111111;
-		uint32_t tx_mod = tile_x & 0b00000000000000000000000001111111;
-		uint32_t ty_mod = tile_y & 0b00000000000000000000000001111111;
+		uint32_t ox_mod = own_x  & B(00000000000000000000000001111111);
+		uint32_t oy_mod = own_y  & B(00000000000000000000000001111111);
+		uint32_t tx_mod = tile_x & B(00000000000000000000000001111111);
+		uint32_t ty_mod = tile_y & B(00000000000000000000000001111111);
 		if ( (ox_mod == tx_mod) && (oy_mod == ty_mod)) { return; }
 		ddttime::unlock_mutex(tile_locker[tx_mod][ty_mod]);
 	}

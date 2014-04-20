@@ -15,7 +15,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
+//#include "stdafx.h"
+#define B BINARY_LITERAL
 
 
 #include <iostream>
@@ -25,6 +26,34 @@
 #include <stdint.h>
 
 using namespace std;
+
+
+
+template<bool> struct BinaryLiteralDigit;
+
+template<> struct BinaryLiteralDigit<true> {
+	static bool const value = true;
+};
+
+template<unsigned long long int OCT, unsigned long long int HEX>
+struct BinaryLiteral {
+	enum {
+		value = (BinaryLiteralDigit<(OCT % 8 < 2)>::value && BinaryLiteralDigit<(HEX >= 0)>::value
+		? (OCT % 8) + (BinaryLiteral<OCT / 8, 0>::value << 1)
+		: -1)
+	};
+};
+
+template<>
+struct BinaryLiteral<0, 0> {
+	enum {
+		value = 0
+	};
+};
+
+#define BINARY_LITERAL(n) BinaryLiteral<0##n##LU, 0x##n##LU>::value
+
+
 
 
 
@@ -964,14 +993,14 @@ class ddtsavegame
 
 		switch(slot_pos)
 		{
-			case 0: if (value){ mask = 0b10000000; } else{ mask = 0b01111111; } break;
-			case 1: if (value){ mask = 0b01000000; } else{ mask = 0b10111111; } break;
-			case 2: if (value){ mask = 0b00100000; } else{ mask = 0b11011111; } break;
-			case 3: if (value){ mask = 0b00010000; } else{ mask = 0b11101111; } break;
-			case 4: if (value){ mask = 0b00001000; } else{ mask = 0b11110111; } break;
-			case 5: if (value){ mask = 0b00000100; } else{ mask = 0b11111011; } break;
-			case 6: if (value){ mask = 0b00000010; } else{ mask = 0b11111101; } break;
-			case 7: if (value){ mask = 0b00000001; } else{ mask = 0b11111110; } break;
+			case 0: if (value){ mask = B(10000000); } else{ mask = B(01111111); } break;
+			case 1: if (value){ mask = B(01000000); } else{ mask = B(10111111); } break;
+			case 2: if (value){ mask = B(00100000); } else{ mask = B(11011111); } break;
+			case 3: if (value){ mask = B(00010000); } else{ mask = B(11101111); } break;
+			case 4: if (value){ mask = B(00001000); } else{ mask = B(11110111); } break;
+			case 5: if (value){ mask = B(00000100); } else{ mask = B(11111011); } break;
+			case 6: if (value){ mask = B(00000010); } else{ mask = B(11111101); } break;
+			case 7: if (value){ mask = B(00000001); } else{ mask = B(11111110); } break;
 		}
 
 		if (value)
@@ -993,14 +1022,14 @@ class ddtsavegame
 
 		switch(slot_pos)
 		{
-			case 0: mask = 0b10000000; break;
-			case 1: mask = 0b01000000; break;
-			case 2: mask = 0b00100000; break;
-			case 3: mask = 0b00010000; break;
-			case 4: mask = 0b00001000; break;
-			case 5: mask = 0b00000100; break;
-			case 6: mask = 0b00000010; break;
-			case 7: mask = 0b00000001; break;
+			case 0: mask = B(10000000); break;
+			case 1: mask = B(01000000); break;
+			case 2: mask = B(00100000); break;
+			case 3: mask = B(00010000); break;
+			case 4: mask = B(00001000); break;
+			case 5: mask = B(00000100); break;
+			case 6: mask = B(00000010); break;
+			case 7: mask = B(00000001); break;
 		}
 
 		mask = mask & slot;

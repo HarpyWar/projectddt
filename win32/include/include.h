@@ -1,0 +1,5 @@
+#include "zlib\zlib.h"
+#include "bzip2\bzlib.h"
+#include "glee\GLee.h"
+#include "glut32\glut.h"
+#include "libmpq\mpq.h"
